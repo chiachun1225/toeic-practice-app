@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TOEIC Practice Lab</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="topbar" aria-label="Test setup">
+        <div>
+          <p class="eyebrow">TOEIC Practice Lab</p>
+          <h1>原創 TOEIC 風格自動出題與批改</h1>
+        </div>
+        <div class="score-strip" aria-live="polite">
+          <div>
+            <span class="score-label">答對</span>
+            <strong id="correctCount">0</strong>
+          </div>
+          <div>
+            <span class="score-label">完成</span>
+            <strong id="progressCount">0/0</strong>
+          </div>
+          <div>
+            <span class="score-label">時間</span>
+            <strong id="timer">--:--</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="setup-panel" id="setupPanel">
+        <div class="field">
+          <label for="mode">模式</label>
+          <select id="mode">
+            <option value="practice">練習：每題立即批改</option>
+            <option value="exam">模擬：全部作答後批改</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="questionCount">題數</label>
+          <select id="questionCount">
+            <option value="10">10 題</option>
+            <option value="20">20 題</option>
+            <option value="40">40 題</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="focus">出題範圍</label>
+          <select id="focus">
+            <option value="mixed">混合題型</option>
+            <option value="vocabulary">語彙</option>
+            <option value="grammar">文法</option>
+            <option value="reading">閱讀理解</option>
+            <option value="listening">聽力理解</option>
+          </select>
+        </div>
+        <button class="primary" id="startBtn" type="button">開始測驗</button>
+      </section>
+
+      <section class="workspace">
+        <aside class="question-nav" aria-label="Question list">
+          <div class="nav-title">題目</div>
+          <div class="nav-grid" id="questionNav"></div>
+        </aside>
+
+        <section class="test-card" id="testCard">
+          <div class="empty-state" id="emptyState">
+            <div class="photo-panel" role="img" aria-label="Business people reviewing documents in an office"></div>
+            <div>
+              <h2>選擇模式後開始</h2>
+              <p>系統會自動產生 TOEIC 風格題目，作答後可自動批改、看解析，並整理你最需要補強的題型。</p>
+            </div>
+          </div>
+
+          <article class="question-view hidden" id="questionView">
+            <header class="question-header">
+              <div>
+                <p class="part-label" id="partLabel"></p>
+                <h2 id="questionTitle"></h2>
+              </div>
+              <span class="difficulty" id="difficulty"></span>
+            </header>
+
+            <div class="prompt" id="prompt"></div>
+            <div class="choices" id="choices"></div>
+            <div class="feedback hidden" id="feedback"></div>
+
+            <footer class="controls">
+              <button id="prevBtn" type="button">上一題</button>
+              <button id="checkBtn" class="secondary" type="button">批改本題</button>
+              <button id="nextBtn" class="primary" type="button">下一題</button>
+              <button id="finishBtn" class="primary hidden" type="button">交卷批改</button>
+            </footer>
+          </article>
+        </section>
+
+        <aside class="insights">
+          <div class="panel">
+            <h2>即時分析</h2>
+            <div class="metric">
+              <span>正確率</span>
+              <strong id="accuracy">0%</strong>
+            </div>
+            <div class="bar"><span id="accuracyBar"></span></div>
+            <div class="metric">
+              <span>預估 TOEIC 閱讀/聽力表現</span>
+              <strong id="estimate">--</strong>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h2>題型弱點</h2>
+            <ul class="weakness-list" id="weaknessList">
+              <li>開始測驗後會顯示統計。</li>
+            </ul>
+          </div>
+
+          <div class="panel">
+            <h2>錯題回顧</h2>
+            <div class="review-list" id="reviewList">尚無錯題。</div>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
