@@ -8,10 +8,10 @@
   </head>
   <body>
     <main class="app-shell">
-      <section class="topbar" aria-label="Test setup">
+      <section class="topbar" aria-label="測驗資訊">
         <div>
           <p class="eyebrow">TOEIC Practice Lab</p>
-          <h1>原創 TOEIC 風格自動出題與批改</h1>
+          <h1>TOEIC 自動出題、批改與裝置紀錄</h1>
         </div>
         <div class="score-strip" aria-live="polite">
           <div>
@@ -31,6 +31,13 @@
 
       <section class="setup-panel" id="setupPanel">
         <div class="field">
+          <label for="userName">使用者</label>
+          <div class="inline-field">
+            <select id="userName"></select>
+            <button id="addUserBtn" type="button" title="新增使用者">＋</button>
+          </div>
+        </div>
+        <div class="field">
           <label for="mode">模式</label>
           <select id="mode">
             <option value="practice">練習：每題立即批改</option>
@@ -43,6 +50,7 @@
             <option value="10">10 題</option>
             <option value="20">20 題</option>
             <option value="40">40 題</option>
+            <option value="60">60 題</option>
           </select>
         </div>
         <div class="field">
@@ -55,21 +63,32 @@
             <option value="listening">聽力理解</option>
           </select>
         </div>
+        <div class="field">
+          <label for="level">證書顏色等級</label>
+          <select id="level">
+            <option value="all">全部等級</option>
+            <option value="orange">Orange 入門</option>
+            <option value="brown">Brown 基礎</option>
+            <option value="green">Green 進階基礎</option>
+            <option value="blue">Blue 中高階</option>
+            <option value="gold">Gold 高階</option>
+          </select>
+        </div>
         <button class="primary" id="startBtn" type="button">開始測驗</button>
       </section>
 
       <section class="workspace">
-        <aside class="question-nav" aria-label="Question list">
+        <aside class="question-nav" aria-label="題目列表">
           <div class="nav-title">題目</div>
           <div class="nav-grid" id="questionNav"></div>
         </aside>
 
         <section class="test-card" id="testCard">
           <div class="empty-state" id="emptyState">
-            <div class="photo-panel" role="img" aria-label="Business people reviewing documents in an office"></div>
+            <div class="photo-panel" role="img" aria-label="商務辦公室與文件檢查情境"></div>
             <div>
-              <h2>選擇模式後開始</h2>
-              <p>系統會自動產生 TOEIC 風格題目，作答後可自動批改、看解析，並整理你最需要補強的題型。</p>
+              <h2>選擇等級後開始</h2>
+              <p>題庫已擴充為固定題加模板題。每題會標示 TOEIC 題型常見度、核心單字常見度，紀錄會保存在目前這台裝置。</p>
             </div>
           </div>
 
@@ -78,6 +97,7 @@
               <div>
                 <p class="part-label" id="partLabel"></p>
                 <h2 id="questionTitle"></h2>
+                <div class="badges" id="badges"></div>
               </div>
               <span class="difficulty" id="difficulty"></span>
             </header>
@@ -104,9 +124,10 @@
             </div>
             <div class="bar"><span id="accuracyBar"></span></div>
             <div class="metric">
-              <span>預估 TOEIC 閱讀/聽力表現</span>
+              <span>預估總分色階</span>
               <strong id="estimate">--</strong>
             </div>
+            <p class="note" id="levelNote">色階依常見 TOEIC L&R 證書分數區間估算。</p>
           </div>
 
           <div class="panel">
@@ -119,6 +140,11 @@
           <div class="panel">
             <h2>錯題回顧</h2>
             <div class="review-list" id="reviewList">尚無錯題。</div>
+          </div>
+
+          <div class="panel">
+            <h2>本機紀錄</h2>
+            <div class="history-list" id="historyList">這位使用者尚無紀錄。</div>
           </div>
         </aside>
       </section>
